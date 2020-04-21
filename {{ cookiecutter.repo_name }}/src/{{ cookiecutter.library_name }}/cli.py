@@ -4,7 +4,7 @@ CLI to execute different analysis steps.
 
 import click
 
-from core.version import __version__
+from {{ cookiecutter.library_name }}.version import __version__
 
 
 @click.group()
