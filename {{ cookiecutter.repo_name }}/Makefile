@@ -76,9 +76,10 @@ check_environment:
 ifeq ($(CI),true)
 	@echo ">>> Running on continuous integration server -- virtual env not required."
 else ifneq ($(PROJECT_NAME),$(shell basename $(CONDA_PREFIX)))
-	$(error "!!! The conda env has not been activated.\nExecute `conda activate $(PROJECT_NAME)`)"
+	$(error "!!! The conda env has not been activated. Execute `conda activate $(PROJECT_NAME)`)"
 else
 	@echo ">>> Conda env is set up correctly."
+endif
 
 #################################################################################
 # PROJECT RULES                                                                 #
