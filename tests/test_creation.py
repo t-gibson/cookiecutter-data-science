@@ -47,7 +47,7 @@ class TestCookieSetup(object):
         assert no_curlies(readme_path)
         if pytest.param.get('project_name'):
             with open(readme_path) as fin:
-                assert 'DrivenData' == next(fin).strip()
+                assert '# DrivenData' == next(fin).strip()
 
     def test_setup(self):
         setup_ = self.path / 'setup.py'
@@ -81,6 +81,16 @@ class TestCookieSetup(object):
         reqs_path = self.path / 'requirements.txt'
         assert reqs_path.exists()
         assert no_curlies(reqs_path)
+
+    def test_dev_requirements(self):
+        reqs_path = self.path / 'requirements-dev.txt'
+        assert reqs_path.exists()
+        assert no_curlies(reqs_path)
+
+        with open(reqs_path) as f:
+            contents = f.read()
+        if pytest.param.get("strip_ipynb_output", "Y") == "Y":
+            assert "nbstripout" in contents
 
     def test_makefile(self):
         makefile_path = self.path / 'Makefile'

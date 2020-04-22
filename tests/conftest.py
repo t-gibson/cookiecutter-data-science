@@ -10,8 +10,9 @@ args = {
         'project_name': 'DrivenData',
         'author_name': 'DrivenData',
         'open_source_license': 'BSD-3-Clause',
-        'library_name': 'library_foo'
-        }
+        'library_name': 'library_foo',
+        "strip_ipynb_output": "N"
+}
 
 
 def system_check(basename):
