@@ -19,11 +19,6 @@ requirements: check_environment
 	python -m pip install -r requirements.txt
 	python -m pip install -r requirements-dev.txt
 
-.PHONY: data
-## Make Dataset
-data: requirements
-	python src/data/make_dataset.py data/raw data/processed
-
 .PHONY: clean
 ## Delete all compiled Python files
 clean:

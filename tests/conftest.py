@@ -10,6 +10,7 @@ args = {
         'project_name': 'DrivenData',
         'author_name': 'DrivenData',
         'open_source_license': 'BSD-3-Clause',
+        'library_name': 'library_foo'
         }
 
 

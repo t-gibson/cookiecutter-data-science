@@ -54,6 +54,14 @@ class TestCookieSetup(object):
         args = ['python', setup_, '--version']
         p = check_output(args).decode('ascii').strip()
         assert p == '0.1.0'
+        assert no_curlies(setup_)
+
+    def test_name(self):
+        setup_ = self.path / 'setup.py'
+        args = ['python', setup_, '--name']
+        p = check_output(args).decode('ascii').strip()
+        library_name = pytest.param.get('library_name', 'core')
+        assert p == library_name
 
     def test_license(self):
         license_path = self.path / 'LICENSE'
@@ -80,6 +88,7 @@ class TestCookieSetup(object):
         assert no_curlies(makefile_path)
 
     def test_folders(self):
+        library_name = pytest.param.get('library_name', 'core')
         expected_dirs = [
             'data',
             'data/external',
@@ -93,10 +102,12 @@ class TestCookieSetup(object):
             'reports',
             'reports/figures',
             'src',
-            'src/data',
-            'src/features',
-            'src/models',
-            'src/visualization',
+            f'src/{library_name}',
+            f'src/{library_name}/data',
+            f'src/{library_name}/features',
+            f'src/{library_name}/models',
+            f'src/{library_name}/visualization',
+            'tests'
         ]
 
         ignored_dirs = [
@@ -105,5 +116,4 @@ class TestCookieSetup(object):
 
         abs_expected_dirs = [str(self.path / d) for d in expected_dirs]
         abs_dirs, _, _ = list(zip(*os.walk(self.path)))
-        assert len(set(abs_expected_dirs + ignored_dirs) - set(abs_dirs)) == 0
-
+        assert set(abs_expected_dirs + ignored_dirs) == set(abs_dirs)
