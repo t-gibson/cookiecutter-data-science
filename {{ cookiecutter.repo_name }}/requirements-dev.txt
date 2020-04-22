@@ -2,6 +2,7 @@ black
 coverage
 flake8
 mypy
+{% if cookiecutter.strip_ipynb_output == 'Y' %}nbstripout{% endif %}
 pytest
 pytest-cov
 tox
