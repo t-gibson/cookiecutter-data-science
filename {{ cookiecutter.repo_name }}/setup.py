@@ -1,8 +1,18 @@
+import os
+import sys
+
 from distutils.util import convert_path
 from setuptools import find_packages, setup
 
+
+def get_script_path():
+    return os.path.dirname(os.path.realpath(sys.argv[0]))
+
+
 main_ns = {}
-ver_path = convert_path("src/{{ cookiecutter.library_name }}/version.py")
+ver_path = convert_path(
+    f"{get_script_path()}/src/{{ cookiecutter.library_name }}/version.py"
+)
 with open(ver_path) as ver_file:
     exec(ver_file.read(), main_ns)
 
